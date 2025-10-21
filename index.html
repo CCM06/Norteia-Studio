@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norteia Studio - Transforme seu Espaço</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style> 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #2A2A68 0%, #4A4A8F 50%, #6A6AB6 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(42, 42, 104, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2A2A68 0%, #4A4A8F 100%);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: white;
+            margin-bottom: 15px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .intro-text {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            margin-bottom: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subtitle {
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            border-left: 4px solid #4A90E2;
+            box-shadow: 0 5px 15px rgba(42, 42, 104, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            color: #2A2A68;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-number {
+            background: #4A90E2;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2A2A68;
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        .label-simple {
+            font-weight: 400;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+            font-family: 'Inter', sans-serif;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #4A4A8F;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(74, 74, 143, 0.1);
+        }
+
+        .radio-grid,
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+
+        .radio-item:hover,
+        .checkbox-item:hover {
+            border-color: #4A90E2;
+            background: #F0F7FF;
+        }
+
+        .radio-item input[type="radio"],
+        .checkbox-item input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .other-input {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .other-input.show {
+            display: block;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4A90E2 0%, #6BA8E8 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 30px auto 0;
+            min-width: 250px;
+            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(74, 144, 226, 0.4);
+        }
+
+        .required::after {
+            content: " *";
+            color: #4A90E2;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 1.8em;
+            }
+            
+            .radio-grid,
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-section {
+                padding: 20px 15px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+        }
+
+        .form-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4A90E2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <!-- SUBSTITUA ESTA IMAGEM PELA SUA LOGO -->
+                    <img src="IMG_4248.PNG" alt="Norteia Studio Logo">
+                </div>
+            </div>
+            <h1 class="title"> Norteia Studio</h1>
+            <p class="intro-text">Queremos ajudar você a ter uma casa mais organizada, bonita e funcional, sem gastar muito.</p>
+            <p class="subtitle">Responda essas perguntas simples para entendermos como podemos te ajudar!</p>
+        </div>
+
+        <div class="form-container">
+            <form id="briefingForm" action="https://formspree.io/f/mgvnbdpl" method="POST">
+                
+                <!-- Campos ocultos do Formspree -->
+                <input type="hidden" name="_subject" value=" Novo Briefing - Norteia Studio">
+                <input type="hidden" name="_replyto" value="%email">
+                <input type="text" name="_gotcha" style="display:none">
+                
+                <!-- Mensagens de feedback -->
+                <div class="success-message" id="successMessage">
+                    <h3> Obrigada pelo seu interesse!</h3>
+                    <p>Seu briefing foi enviado com sucesso. Entraremos em contato em até 24 horas úteis.</p>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Enviando suas informações...</p>
+                </div>
+
+                <!-- 1. Dados Pessoais -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">1</span>
+                        Dados Pessoais
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="required label-simple">Nome completo</label>
+                        <input type="text" name="nome" required placeholder="Seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-simple">Celular/WhatsApp</label>
+                        <input type="tel" name="telefone" required placeholder="(11) 99999-9999">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-simple">Bairro onde mora</label>
+                        <input type="text" name="bairro" required placeholder="Seu bairro">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-simple">E-mail (opcional)</label>
+                        <input type="email" name="email" placeholder="seu@email.com">
+                    </div>
+                </div>
+
+                <!-- 2. Sobre o Cômodo -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">2</span>
+                        Sobre o Cômodo
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="required label-simple">Qual cômodo você quer melhorar?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="comodo" value="Sala" required> Sala
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="comodo" value="Quarto"> Quarto
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="comodo" value="Cozinha"> Cozinha
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="comodo" value="Banheiro"> Banheiro
+                            </label>
+                            <label class="radio-item" id="outro-comodo">
+                                <input type="radio" name="comodo" value="Outro"> Outro:
+                            </label>
+                        </div>
+                        <input type="text" name="comodo_outro" class="other-input" placeholder="Qual cômodo?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required label-simple">Quantas pessoas moram com você?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="pessoas" value="1-2" required> 1-2
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="pessoas" value="3-4"> 3-4
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="pessoas" value="5 ou mais"> 5 ou mais
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required label-simple">Tem crianças ou idosos na casa?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="criancas_idosos" value="Não" required> Não
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="criancas_idosos" value="Sim, crianças"> Sim, crianças
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="criancas_idosos" value="Sim, idosos"> Sim, idosos
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="criancas_idosos" value="Os dois"> Os dois
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required label-simple">Tem animais em casa?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="animais" value="Não" required> Não
+                            </label>
+                            <label class="radio-item" id="sim-animais">
+                                <input type="radio" name="animais" value="Sim"> Sim
+                            </label>
+                        </div>
+                        <input type="text" name="animais_tipo" class="other-input" placeholder="Quais animais?">
+                    </div>
+                </div>
+
+                <!-- 3. Principais Dificuldades -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">3</span>
+                        Principais Dificuldades
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="required label-simple">O que mais te incomoda nesse cômodo? (pode marcar mais de um)</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="dificuldades[]" value="desorganização">desorganização
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="dificuldades[]" value="Espaço muito pequeno"> Espaço muito pequeno
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="dificuldades[]" value="Falta de lugar para guardar coisas"> Falta de lugar para guardar coisas
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="dificuldades[]" value="Móveis velhos ou quebrados"> Móveis velhos ou quebrados
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="dificuldades[]" value="Pouca claridade/escuro"> Pouca claridade/escuro
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="dificuldades[]" value="Dificuldade para circular"> Dificuldade para circular
+                            </label>
+                            <label class="checkbox-item" id="outra-dificuldade">
+                                <input type="checkbox" name="dificuldades[]" value="Outro"> Outro
+                            </label>
+                        </div>
+                        <input type="text" name="dificuldade_outro" class="other-input" placeholder="Qual outra dificuldade?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required label-simple">Como você sonha com esse espaço?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="sonhos[]" value="Mais organizado e fácil de limpar"> Mais organizado e fácil de limpar
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="sonhos[]" value="Mais aconchegante e bonito"> Mais aconchegante e bonito
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="sonhos[]" value="Mais espaço para a família"> Mais espaço para a família
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="sonhos[]" value="Um cantinho só meu"> Um cantinho só meu
+                            </label>
+                            <label class="checkbox-item" id="outro-sonho">
+                                <input type="checkbox" name="sonhos[]" value="Outro"> Outro
+                            </label>
+                        </div>
+                        <input type="text" name="sonho_outro" class="other-input" placeholder="Qual outro sonho?">
+                    </div>
+                </div>
+
+                <!-- 4. Seu Gosto Pessoal -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">4</span>
+                        Seu Gosto Pessoal
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="required label-simple">Que estilo você mais gosta?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="estilo" value="Moderno e simples" required> Moderno e simples
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="estilo" value="Aconchegante e colorido"> Aconchegante e colorido
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="estilo" value="Rústico/natural"> Rústico/natural
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="estilo" value="Não sei - preciso de ajuda"> Não sei - preciso de ajuda
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-simple">Quais cores você gosta?</label>
+                        <input type="text" name="cores_gosta" placeholder="Exemplo: azul, verde, amarelo, cores claras...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-simple">Tem alguma cor que não gosta?</label>
+                        <input type="text" name="cores_nao_gosta" placeholder="Exemplo: vermelho, roxo...">
+                    </div>
+                </div>
+
+                <!-- 5. Orçamento e Tempo -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">5</span>
+                        Orçamento e Tempo
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="required label-simple">Quanto você pode investir?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="orcamento" value="Até R$ 150" required> Até R$ 150
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="orcamento" value="R$ 150 - R$ 300"> R$ 150 - R$ 300
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="orcamento" value="R$ 300 - R$ 500"> R$ 300 - R$ 500
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="orcamento" value="R$ 500 - R$ 800"> R$ 500 - R$ 800
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="orcamento" value="Posso conversar sobre valores"> Posso conversar sobre valores
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required label-simple">Quando quer começar?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="prazo" value="Imediatamente" required> Imediatamente
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="prazo" value="Nos próximos 15 dias"> Nos próximos 15 dias
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="prazo" value="No próximo mês"> No próximo mês
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="prazo" value="Só planejando por enquanto"> Só planejando por enquanto
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Fotos e Medidas -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">6</span>
+                        Fotos e Medidas
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="required label-simple">Tem fotos do cômodo?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="fotos" value="Sim, posso enviar" required> Sim, posso enviar
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="fotos" value="Não, mas posso tirar"> Não, mas posso tirar
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="fotos" value="Prefiro não enviar fotos"> Prefiro não enviar fotos
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required label-simple">Precisa de ajuda para medir o espaço?</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="medidas" value="Já tenho as medidas" required> Já tenho as medidas
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="medidas" value="Preciso de instruções simples"> Preciso de instruções simples
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="medidas" value="Posso agendar uma visita técnica (a partir de R$ 50)"> Posso agendar uma visita técnica (a partir de R$ 50)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Algo Mais? -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-number">7</span>
+                        Algo Mais?
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="label-simple">Tem alguma coisa importante que precisamos saber?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="informacoes_importantes[]" value="Tenho alguma necessidade especial"> Tenho alguma necessidade especial
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="informacoes_importantes[]" value="Preciso de móveis adaptados"> Preciso de móveis adaptados
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="informacoes_importantes[]" value="Tenho alergia a algum material"> Tenho alergia a algum material
+                            </label>
+                            <label class="checkbox-item" id="outra-informacao">
+                                <input type="checkbox" name="informacoes_importantes[]" value="Outro"> Outro
+                            </label>
+                        </div>
+                        <input type="text" name="informacao_outro" class="other-input" placeholder="Qual outra informação?">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-simple">Alguma coisa que não pode faltar no seu novo espaço?</label>
+                        <textarea name="nao_pode_faltar" rows="3" placeholder="Conte para a gente o que é essencial para você..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Enviar Meu Briefing
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Controle dos campos "Outro"
+        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const outros = {
+                    'outro-comodo': 'comodo_outro',
+                    'sim-animais': 'animais_tipo', 
+                    'outra-dificuldade': 'dificuldade_outro',
+                    'outro-sonho': 'sonho_outro',
+                    'outra-informacao': 'informacao_outro'
+                };
+
+                for (const [triggerId, inputClass] of Object.entries(outros)) {
+                    const trigger = document.getElementById(triggerId);
+                    const otherInput = document.querySelector(`.other-input[name="${inputClass}"]`);
+                    
+                    if (trigger && otherInput) {
+                        const isChecked = trigger.querySelector('input').checked;
+                        if (isChecked) {
+                            otherInput.classList.add('show');
+                            otherInput.required = true;
+                        } else {
+                            otherInput.classList.remove('show');
+                            otherInput.required = false;
+                            otherInput.value = '';
+                        }
+                    }
+                }
+            });
+        });
+
+        // Envio do formulário com Formspree
+        document.getElementById('briefingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Mostra loading
+            submitBtn.style.display = 'none';
+            loading.style.display = 'block';
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Sucesso
+                    loading.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    form.reset();
+                    
+                    // Scroll para a mensagem de sucesso
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Esconde a mensagem após 8 segundos e mostra o botão novamente
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                        submitBtn.style.display = 'block';
+                    }, 8000);
+                    
+                } else {
+                    throw new Error('Erro no envio');
+                }
+                
+            } catch (error) {
+                // Erro
+                loading.style.display = 'none';
+                submitBtn.style.display = 'block';
+                alert('❌ Ops! Não conseguimos enviar seu briefing. Tente novamente ou entre em contato diretamente pelo WhatsApp.');
+            }
+        });
+
+        // Efeito de digitação no subtítulo
+        const subtitle = document.querySelector('.subtitle');
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
