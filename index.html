@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Norteia Studio - Transforme seu Espaço</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <style> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -27,6 +28,18 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(42, 42, 104, 0.3);
+            animation: containerEntrance 0.8s ease-out;
+        }
+
+        @keyframes containerEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .header {
@@ -39,7 +52,6 @@
 
         .logo-container {
             margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
         }
 
         .logo {
@@ -53,17 +65,38 @@
             overflow: hidden;
             border: 4px solid white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1); 
+            }
+            50% { 
+                transform: translateY(-10px) scale(1.02); 
+            }
+        }
+
+        .logo:hover {
+            animation: logoFloatHover 1.5s ease-in-out infinite;
+        }
+
+        @keyframes logoFloatHover {
+            0%, 100% { 
+                transform: translateY(0px) scale(1.05); 
+                box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                transform: translateY(-8px) scale(1.07); 
+                box-shadow: 0 12px 30px rgba(255, 255, 255, 0.4);
+            }
         }
 
         .logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
         }
 
         .title {
@@ -74,6 +107,11 @@
             animation: slideIn 1s ease-out;
         }
 
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         .intro-text {
             font-size: 1.1em;
             color: rgba(255, 255, 255, 0.95);
@@ -82,17 +120,19 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeIn 1.2s ease-out 0.3s both;
         }
 
         .subtitle {
             font-size: 1em;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 300;
+            animation: fadeIn 1.2s ease-out 0.6s both;
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .form-container {
@@ -106,6 +146,24 @@
             border-radius: 15px;
             border-left: 4px solid #4A90E2;
             box-shadow: 0 5px 15px rgba(42, 42, 104, 0.1);
+            animation: fadeInUp 0.6s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 42, 104, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
@@ -128,6 +186,11 @@
             align-items: center;
             justify-content: center;
             font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+
+        .form-section:hover .section-number {
+            transform: scale(1.1);
         }
 
         .form-group {
@@ -206,10 +269,48 @@
         .other-input {
             margin-top: 10px;
             display: none;
+            animation: fadeIn 0.5s ease;
         }
 
         .other-input.show {
             display: block;
+        }
+
+        .whatsapp-recommendation {
+            background: #f8f9fa;
+            color: #333;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0;
+            border: 2px solid #25D366;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.1);
+        }
+
+        .whatsapp-recommendation h3 {
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #2A2A68;
+        }
+
+        .whatsapp-icon {
+            color: #25D366;
+            font-size: 1.2em;
+        }
+
+        .whatsapp-recommendation p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        .whatsapp-recommendation .highlight {
+            color: #25D366;
+            font-weight: 600;
         }
 
         .submit-btn {
@@ -227,11 +328,26 @@
             min-width: 250px;
             box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
             font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 15px 25px rgba(74, 144, 226, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-icon {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover .submit-icon {
+            transform: translateX(5px);
         }
 
         .required::after {
@@ -262,21 +378,6 @@
             }
         }
 
-        .form-section {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .success-message {
             display: none;
             text-align: center;
@@ -285,6 +386,7 @@
             color: white;
             border-radius: 10px;
             margin: 20px 0;
+            animation: fadeIn 0.6s ease;
         }
 
         .loading {
@@ -299,7 +401,7 @@
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            animation: spin 2s linear infinite;
+            animation: spin 1.5s linear infinite;
             margin: 0 auto 10px;
         }
 
@@ -318,22 +420,25 @@
                     <img src="IMG_4248.PNG" alt="Norteia Studio Logo">
                 </div>
             </div>
-            <h1 class="title"> Norteia Studio</h1>
+            <h1 class="title">Norteia Studio</h1>
             <p class="intro-text">Queremos ajudar você a ter uma casa mais organizada, bonita e funcional, sem gastar muito.</p>
             <p class="subtitle">Responda essas perguntas simples para entendermos como podemos te ajudar!</p>
         </div>
 
         <div class="form-container">
-            <form id="briefingForm" action="https://formspree.io/f/mgvnbdpl" method="POST">
+            <!-- FORMSUBMIT CONFIGURADO -->
+            <form id="briefingForm" action="https://formsubmit.co/norteiastudio01@gmail.com" method="POST">
                 
-                <!-- Campos ocultos do Formspree -->
-                <input type="hidden" name="_subject" value=" Novo Briefing - Norteia Studio">
-                <input type="hidden" name="_replyto" value="%email">
-                <input type="text" name="_gotcha" style="display:none">
+                <!-- Configurações do FormSubmit -->
+                <input type="hidden" name="_subject" value="Novo Briefing - Norteia Studio">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="">
                 
                 <!-- Mensagens de feedback -->
                 <div class="success-message" id="successMessage">
-                    <h3> Obrigada pelo seu interesse!</h3>
+                    <h3>Obrigada pelo seu interesse!</h3>
                     <p>Seu briefing foi enviado com sucesso. Entraremos em contato em até 24 horas úteis.</p>
                 </div>
 
@@ -595,21 +700,6 @@
                     </h2>
                     
                     <div class="form-group">
-                        <label class="required label-simple">Tem fotos do cômodo?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="fotos" value="Sim, posso enviar" required> Sim, posso enviar
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="fotos" value="Não, mas posso tirar"> Não, mas posso tirar
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="fotos" value="Prefiro não enviar fotos"> Prefiro não enviar fotos
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="required label-simple">Precisa de ajuda para medir o espaço?</label>
                         <div class="radio-grid">
                             <label class="radio-item">
@@ -622,6 +712,13 @@
                                 <input type="radio" name="medidas" value="Posso agendar uma visita técnica (a partir de R$ 50)"> Posso agendar uma visita técnica (a partir de R$ 50)
                             </label>
                         </div>
+                    </div>
+
+                    <!-- Recomendação do WhatsApp -->
+                    <div class="whatsapp-recommendation">
+                        <h3><i class="fab fa-whatsapp whatsapp-icon"></i> Fotos e Vídeos do Espaço</h3>
+                        <p><strong>Para criarmos a solução perfeita para você, precisamos ver seu espaço!</strong></p>
+                        <p>Envie fotos e vídeos do cômodo pelo <span class="highlight">WhatsApp (96) 99120-8893</span> para entendermos melhor suas necessidades.</p>
                     </div>
                 </div>
 
@@ -658,6 +755,7 @@
                 </div>
 
                 <button type="submit" class="submit-btn">
+                    <span class="submit-icon"><i class="fas fa-paper-plane"></i></span>
                     Enviar Meu Briefing
                 </button>
             </form>
@@ -695,7 +793,7 @@
             });
         });
 
-        // Envio do formulário com Formspree
+        // Envio do formulário com FormSubmit
         document.getElementById('briefingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -704,14 +802,35 @@
             const loading = document.getElementById('loading');
             const successMessage = document.getElementById('successMessage');
             
+            // Validação básica
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#ff4444';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+
+            if (!isValid) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
             // Mostra loading
             submitBtn.style.display = 'none';
             loading.style.display = 'block';
             
             try {
+                // FormSubmit vai cuidar do envio
+                const formData = new FormData(form);
+                
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: new FormData(form),
+                    body: formData,
                     headers: {
                         'Accept': 'application/json'
                     }
@@ -740,8 +859,18 @@
                 // Erro
                 loading.style.display = 'none';
                 submitBtn.style.display = 'block';
-                alert('❌ Ops! Não conseguimos enviar seu briefing. Tente novamente ou entre em contato diretamente pelo WhatsApp.');
+                alert('Ops! Não conseguimos enviar seu briefing. Tente novamente ou entre em contato diretamente pelo WhatsApp.');
+                console.error('Erro no envio:', error);
             }
+        });
+
+        // Remove estilos de erro quando o usuário começa a digitar
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('input', function() {
+                if (this.style.borderColor === 'rgb(255, 68, 68)') {
+                    this.style.borderColor = '';
+                }
+            });
         });
 
         // Efeito de digitação no subtítulo
