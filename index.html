@@ -434,7 +434,7 @@
                 <input type="hidden" name="_template" value="table">
                 <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="">
+                <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
                 
                 <!-- Mensagens de feedback -->
                 <div class="success-message" id="successMessage">
@@ -764,9 +764,9 @@
 
     <script>
         // Controle dos campos "Outro"
-        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(input) {
             input.addEventListener('change', function() {
-                const outros = {
+                var outros = {
                     'outro-comodo': 'comodo_outro',
                     'sim-animais': 'animais_tipo', 
                     'outra-dificuldade': 'dificuldade_outro',
@@ -774,19 +774,22 @@
                     'outra-informacao': 'informacao_outro'
                 };
 
-                for (const [triggerId, inputClass] of Object.entries(outros)) {
-                    const trigger = document.getElementById(triggerId);
-                    const otherInput = document.querySelector(`.other-input[name="${inputClass}"]`);
-                    
-                    if (trigger && otherInput) {
-                        const isChecked = trigger.querySelector('input').checked;
-                        if (isChecked) {
-                            otherInput.classList.add('show');
-                            otherInput.required = true;
-                        } else {
-                            otherInput.classList.remove('show');
-                            otherInput.required = false;
-                            otherInput.value = '';
+                for (var triggerId in outros) {
+                    if (outros.hasOwnProperty(triggerId)) {
+                        var trigger = document.getElementById(triggerId);
+                        var inputClass = outros[triggerId];
+                        var otherInput = document.querySelector('.other-input[name="' + inputClass + '"]');
+                        
+                        if (trigger && otherInput) {
+                            var isChecked = trigger.querySelector('input').checked;
+                            if (isChecked) {
+                                otherInput.classList.add('show');
+                                otherInput.required = true;
+                            } else {
+                                otherInput.classList.remove('show');
+                                otherInput.required = false;
+                                otherInput.value = '';
+                            }
                         }
                     }
                 }
@@ -794,19 +797,19 @@
         });
 
         // Envio do formulário com FormSubmit
-        document.getElementById('briefingForm').addEventListener('submit', async function(e) {
+        document.getElementById('briefingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const form = e.target;
-            const submitBtn = form.querySelector('.submit-btn');
-            const loading = document.getElementById('loading');
-            const successMessage = document.getElementById('successMessage');
+            var form = e.target;
+            var submitBtn = form.querySelector('.submit-btn');
+            var loading = document.getElementById('loading');
+            var successMessage = document.getElementById('successMessage');
             
             // Validação básica
-            const requiredFields = form.querySelectorAll('[required]');
-            let isValid = true;
+            var requiredFields = form.querySelectorAll('[required]');
+            var isValid = true;
             
-            requiredFields.forEach(field => {
+            requiredFields.forEach(function(field) {
                 if (!field.value.trim()) {
                     isValid = false;
                     field.style.borderColor = '#ff4444';
@@ -824,48 +827,21 @@
             submitBtn.style.display = 'none';
             loading.style.display = 'block';
             
-            try {
-                // FormSubmit vai cuidar do envio
-                const formData = new FormData(form);
-                
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // Sucesso
+            // Envio tradicional do formulário (compatível com Safari)
+            form.submit();
+            
+            // Fallback: se o envio não funcionar após 10 segundos
+            setTimeout(function() {
+                if (loading.style.display !== 'none') {
                     loading.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    form.reset();
-                    
-                    // Scroll para a mensagem de sucesso
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Esconde a mensagem após 8 segundos e mostra o botão novamente
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                        submitBtn.style.display = 'block';
-                    }, 8000);
-                    
-                } else {
-                    throw new Error('Erro no envio');
+                    submitBtn.style.display = 'block';
+                    alert('Parece que houve um problema com o envio. Entre em contato diretamente pelo WhatsApp (96) 99120-8893');
                 }
-                
-            } catch (error) {
-                // Erro
-                loading.style.display = 'none';
-                submitBtn.style.display = 'block';
-                alert('Ops! Não conseguimos enviar seu briefing. Tente novamente ou entre em contato diretamente pelo WhatsApp.');
-                console.error('Erro no envio:', error);
-            }
+            }, 10000);
         });
 
         // Remove estilos de erro quando o usuário começa a digitar
-        document.querySelectorAll('input, textarea, select').forEach(field => {
+        document.querySelectorAll('input, textarea, select').forEach(function(field) {
             field.addEventListener('input', function() {
                 if (this.style.borderColor === 'rgb(255, 68, 68)') {
                     this.style.borderColor = '';
@@ -874,10 +850,10 @@
         });
 
         // Efeito de digitação no subtítulo
-        const subtitle = document.querySelector('.subtitle');
-        const text = subtitle.textContent;
+        var subtitle = document.querySelector('.subtitle');
+        var text = subtitle.textContent;
         subtitle.textContent = '';
-        let i = 0;
+        var i = 0;
         
         function typeWriter() {
             if (i < text.length) {
