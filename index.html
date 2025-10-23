@@ -3,867 +3,1620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Norteia Studio - Transforme seu Espaço</title>
+    <title>Norteia Studio - Design Acessível para Todos</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Reset CSS compatível com todos os navegadores */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        :root {
+            --cor-destaque: #2d2d2d;
+            --cor-destaque-claro: #5a5a5a;
+            --cor-destaque-suave: #7a7a7a;
+            --cor-texto: #1a1a1a;
+            --cor-texto-secundario: #5a5a5a;
+            --cor-fundo: #f5f5f5;
+            --cor-branco: #ffffff;
+            --cor-cinza-claro: #e8e8e8;
+            --cor-cinza-medio: #d6d6d6;
+            --cor-cinza-escuro: #3a3a3a;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #2A2A68 0%, #4A4A8F 50%, #6A6AB6 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.8) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.6) 0%, transparent 50%);
+            background-size: 800px 800px, 600px 600px;
+            background-position: -200px -200px, 600px 300px;
             line-height: 1.6;
+            color: var(--cor-texto);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Container responsivo */
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(42, 42, 104, 0.3);
-            animation: containerEntrance 0.8s ease-out;
+            padding: 0 20px;
+            width: 100%;
         }
 
-        @keyframes containerEntrance {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Header compatível */
+        header {
+            background: var(--cor-branco);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .header {
-            background: linear-gradient(135deg, #2A2A68 0%, #4A4A8F 100%);
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-container {
-            margin-bottom: 20px;
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto;
             display: flex;
             align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            filter: grayscale(100%) contrast(130%);
+            transition: all 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px); 
+            }
+            50% { 
+                transform: translateY(-8px); 
+            }
+        }
+
+        /* Menu de navegação responsivo */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            animation: logoFloat 3s ease-in-out infinite;
         }
 
-        @keyframes logoFloat {
-            0%, 100% { 
-                transform: translateY(0px) scale(1); 
-            }
-            50% { 
-                transform: translateY(-10px) scale(1.02); 
-            }
+        .nav-menu a {
+            color: var(--cor-texto);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            padding: 5px 0;
         }
 
-        .logo:hover {
-            animation: logoFloatHover 1.5s ease-in-out infinite;
+        .nav-menu a:hover {
+            color: var(--cor-destaque-claro);
         }
 
-        @keyframes logoFloatHover {
-            0%, 100% { 
-                transform: translateY(0px) scale(1.05); 
-                box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-            }
-            50% { 
-                transform: translateY(-8px) scale(1.07); 
-                box-shadow: 0 12px 30px rgba(255, 255, 255, 0.4);
-            }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--cor-destaque);
+            transition: width 0.3s;
         }
 
-        .logo img {
+        .nav-menu a:hover::after {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
-        .title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2em;
+        .btn-colaborador {
+            background: var(--cor-destaque-suave);
             color: white;
-            margin-bottom: 15px;
-            animation: slideIn 1s ease-out;
+            padding: 8px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--cor-destaque-suave);
+            white-space: nowrap;
+            display: inline-block;
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .btn-colaborador:hover {
+            background: transparent;
+            color: var(--cor-destaque-suave);
+            transform: translateY(-2px);
         }
 
-        .intro-text {
-            font-size: 1.1em;
-            color: rgba(255, 255, 255, 0.95);
-            font-weight: 400;
-            margin-bottom: 10px;
+        /* Hero Section otimizada */
+        .hero {
+            background: linear-gradient(135deg, var(--cor-branco) 0%, var(--cor-cinza-claro) 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(45,45,45,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(45,45,45,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: clamp(2.5rem, 5vw, 3.2rem);
+            margin-bottom: 25px;
+            color: var(--cor-texto);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+            margin-bottom: 35px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeIn 1.2s ease-out 0.3s both;
+            color: var(--cor-texto-secundario);
+            line-height: 1.7;
         }
 
-        .subtitle {
-            font-size: 1em;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            animation: fadeIn 1.2s ease-out 0.6s both;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .form-container {
-            padding: 30px;
-        }
-
-        .form-section {
-            margin-bottom: 30px;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            border-left: 4px solid #4A90E2;
-            box-shadow: 0 5px 15px rgba(42, 42, 104, 0.1);
-            animation: fadeInUp 0.6s ease-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-section:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 42, 104, 0.15);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            color: #2A2A68;
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-number {
-            background: #4A90E2;
+        .btn-hero {
+            display: inline-block;
+            background: var(--cor-destaque);
             color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9em;
-            transition: transform 0.3s ease;
-        }
-
-        .form-section:hover .section-number {
-            transform: scale(1.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #2A2A68;
-            font-weight: 500;
-            font-size: 1em;
-        }
-
-        .label-simple {
-            font-weight: 400;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #E0E0E0;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #FAFAFA;
-            font-family: 'Inter', sans-serif;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: #4A4A8F;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(74, 74, 143, 0.1);
-        }
-
-        .radio-grid,
-        .checkbox-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .radio-item,
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 15px;
-            border: 2px solid #E0E0E0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: #FAFAFA;
-        }
-
-        .radio-item:hover,
-        .checkbox-item:hover {
-            border-color: #4A90E2;
-            background: #F0F7FF;
-        }
-
-        .radio-item input[type="radio"],
-        .checkbox-item input[type="checkbox"] {
-            margin: 0;
-        }
-
-        .other-input {
-            margin-top: 10px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .other-input.show {
-            display: block;
-        }
-
-        .whatsapp-recommendation {
-            background: #f8f9fa;
-            color: #333;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 25px 0;
-            border: 2px solid #25D366;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.1);
-        }
-
-        .whatsapp-recommendation h3 {
-            margin-bottom: 12px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #2A2A68;
-        }
-
-        .whatsapp-icon {
-            color: #25D366;
-            font-size: 1.2em;
-        }
-
-        .whatsapp-recommendation p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
-            color: #555;
-        }
-
-        .whatsapp-recommendation .highlight {
-            color: #25D366;
-            font-weight: 600;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #4A90E2 0%, #6BA8E8 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            font-size: 18px;
-            font-weight: 600;
+            padding: 15px 40px;
             border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 30px auto 0;
-            min-width: 250px;
-            box-shadow: 0 10px 20px rgba(74, 144, 226, 0.3);
-            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--cor-destaque);
             position: relative;
             overflow: hidden;
         }
 
-        .submit-btn:hover {
+        .btn-hero:hover {
+            background: transparent;
+            color: var(--cor-destaque);
             transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .submit-btn:active {
-            transform: translateY(-1px);
+        /* Seções gerais responsivas */
+        section {
+            padding: 80px 0;
         }
 
-        .submit-icon {
-            margin-right: 10px;
+        .section-title {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: clamp(2rem, 4vw, 2.4rem);
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--cor-texto);
+            position: relative;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--cor-destaque);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Sobre Nós responsivo */
+        .sobre-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .sobre-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
+        }
+
+        .sobre-texto {
+            padding-right: 0;
+        }
+
+        @media (min-width: 768px) {
+            .sobre-texto {
+                padding-right: 20px;
+            }
+        }
+
+        .sobre-texto p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: var(--cor-texto-secundario);
+            line-height: 1.7;
+        }
+
+        .equipe-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .membro {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid var(--cor-cinza-medio);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .membro {
+                padding: 35px;
+            }
+        }
+
+        .membro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--cor-destaque);
+            transform: scaleY(0);
             transition: transform 0.3s ease;
         }
 
-        .submit-btn:hover .submit-icon {
-            transform: translateX(5px);
+        .membro:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .required::after {
-            content: " *";
-            color: #4A90E2;
+        .membro:hover::before {
+            transform: scaleY(1);
+        }
+
+        .membro h3 {
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .membro-cargo {
+            color: var(--cor-destaque-claro);
+            font-weight: 500;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .membro p {
+            color: var(--cor-texto-secundario);
+            line-height: 1.7;
+        }
+
+        /* Dados IBGE responsivo */
+        .dados-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--cor-cinza-medio);
+        }
+
+        @media (min-width: 768px) {
+            .dados-container {
+                padding: 50px;
+            }
+        }
+
+        .dados-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--cor-cinza-claro);
+        }
+
+        .dados-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .dados-titulo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .dados-icon {
+            color: var(--cor-destaque);
+            font-size: 1.4rem;
+        }
+
+        .dados-titulo h3 {
+            color: var(--cor-texto);
+            font-size: 1.3rem;
+        }
+
+        .dados-item p {
+            color: var(--cor-texto-secundario);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Serviços - Carrossel compatível */
+        .servicos-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .servicos-carrossel {
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 10px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        .servicos-carrossel::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+
+        .servico-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            min-width: 300px;
+            flex-shrink: 0;
+            border: 1px solid var(--cor-cinza-medio);
+        }
+
+        @media (min-width: 768px) {
+            .servico-card {
+                min-width: 340px;
+            }
+        }
+
+        .servico-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .servico-header {
+            background: var(--cor-destaque);
+            color: white;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .servico-header {
+                padding: 30px;
+            }
+        }
+
+        .servico-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .servico-titulo {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            .servico-titulo {
+                font-size: 1.5rem;
+            }
+        }
+
+        .servico-preco {
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            .servico-preco {
+                font-size: 2rem;
+            }
+        }
+
+        .servico-descricao {
+            padding: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .servico-descricao {
+                padding: 30px;
+            }
+        }
+
+        .servico-descricao p {
+            margin-bottom: 18px;
+            font-style: italic;
+            color: var(--cor-texto-secundario);
+            line-height: 1.6;
+        }
+
+        .servico-lista {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .servico-lista li {
+            margin-bottom: 10px;
+            padding-left: 22px;
+            position: relative;
+            color: var(--cor-texto-secundario);
+            line-height: 1.6;
+        }
+
+        .servico-lista li:before {
+            content: "•";
+            color: var(--cor-destaque);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .servico-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: var(--cor-texto-secundario);
+            padding-top: 15px;
+            border-top: 1px solid var(--cor-cinza-claro);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-servico {
+            display: block;
+            text-align: center;
+            background: var(--cor-destaque);
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--cor-destaque);
+            width: 100%;
+        }
+
+        .btn-servico:hover {
+            background: transparent;
+            color: var(--cor-destaque);
+        }
+
+        .carrossel-controles {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .carrossel-btn {
+            background: var(--cor-destaque);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            border: 1px solid var(--cor-destaque);
+            font-size: 1.2rem;
+        }
+
+        .carrossel-btn:hover {
+            background: transparent;
+            color: var(--cor-destaque);
+            transform: scale(1.1);
+        }
+
+        /* Como Funciona responsivo */
+        .processo {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--cor-cinza-medio);
+        }
+
+        @media (min-width: 768px) {
+            .processo {
+                padding: 50px;
+            }
+        }
+
+        .processo-lista {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .processo-lista li {
+            counter-increment: step-counter;
+            margin-bottom: 30px;
+            padding-left: 70px;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .processo-lista li {
+                padding-left: 90px;
+                margin-bottom: 40px;
+            }
+        }
+
+        .processo-lista li:last-child {
+            margin-bottom: 0;
+        }
+
+        .processo-lista li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background: var(--cor-destaque);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+        }
+
+        @media (min-width: 768px) {
+            .processo-lista li:before {
+                width: 60px;
+                height: 60px;
+                font-size: 1.4rem;
+            }
+        }
+
+        .processo-lista h3 {
+            color: var(--cor-texto);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .processo-lista h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .processo-lista p {
+            color: var(--cor-texto-secundario);
+            line-height: 1.7;
+        }
+
+        /* Colaboradores responsivo */
+        .colaboradores {
+            background: linear-gradient(135deg, var(--cor-cinza-claro) 0%, var(--cor-branco) 100%);
+            color: var(--cor-texto);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .colaboradores::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(45,45,45,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 90%, rgba(45,45,45,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .colaboradores-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .colaboradores-container p {
+            color: var(--cor-texto-secundario);
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .btn-colaborar {
+            display: inline-block;
+            background: var(--cor-destaque-suave);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--cor-destaque-suave);
+        }
+
+        .btn-colaborar:hover {
+            background: transparent;
+            color: var(--cor-destaque-suave);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contato responsivo */
+        .contato-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .contato-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--cor-texto);
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--cor-cinza-medio);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: var(--cor-branco);
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            color: var(--cor-texto);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--cor-destaque);
+            box-shadow: 0 0 0 3px rgba(45,45,45,0.1);
+        }
+
+        .btn-enviar {
+            background: var(--cor-destaque);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--cor-destaque);
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .btn-enviar {
+                width: auto;
+            }
+        }
+
+        .btn-enviar:hover {
+            background: transparent;
+            color: var(--cor-destaque);
+        }
+
+        .info-contato {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .info-icon {
+            background: var(--cor-destaque);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .info-item:hover .info-icon {
+            transform: scale(1.1);
+        }
+
+        .info-item h4 {
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-item p {
+            color: var(--cor-texto-secundario);
+            line-height: 1.6;
+        }
+
+        /* Footer responsivo */
+        footer {
+            background: var(--cor-cinza-escuro);
+            color: white;
+            padding: 50px 0 30px;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 70px 0 30px;
+            }
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 50px;
+            }
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-about p {
+            color: #bbb;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links li {
+            color: #bbb;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--cor-destaque);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries para dispositivos específicos */
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                gap: 15px;
+            }
+            
+            .hero {
+                padding: 80px 0;
+                min-height: 50vh;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .servico-card {
+                min-width: 280px;
+            }
+            
+            .processo-lista li {
+                padding-left: 60px;
+            }
+            
+            .processo-lista li:before {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
+            .header-container {
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                gap: 15px;
+            }
+        }
+
+        /* Suporte para navegadores antigos */
+        @supports not (display: grid) {
+            .sobre-container,
+            .contato-container,
+            .footer-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .sobre-container > *,
+            .contato-container > *,
+            .footer-container > * {
+                flex: 1 1 300px;
                 margin: 10px;
             }
-            
-            .title {
-                font-size: 1.8em;
+        }
+
+        /* Melhorias de acessibilidade */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
             
-            .radio-grid,
-            .checkbox-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-section {
-                padding: 20px 15px;
-            }
-            
-            .form-container {
-                padding: 20px;
+            .logo-img {
+                animation: none !important;
             }
         }
 
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 30px;
-            background: #4CAF50;
-            color: white;
-            border-radius: 10px;
-            margin: 20px 0;
-            animation: fadeIn 0.6s ease;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4A90E2;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1.5s linear infinite;
-            margin: 0 auto 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Focus visível para acessibilidade */
+        button:focus-visible,
+        a:focus-visible,
+        .form-control:focus-visible {
+            outline: 2px solid var(--cor-destaque);
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    <!-- SUBSTITUA ESTA IMAGEM PELA SUA LOGO -->
-                    <img src="IMG_4248.PNG" alt="Norteia Studio Logo">
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <!-- SUBSTITUA ESTA IMAGEM PELA SUA LOGO -->
+                <img src="IMG_4248.jpg" alt="Norteia Studio" class="logo-img">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li><a href="#colaboradores" class="btn-colaborador">Seja Colaborador</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Resto do código permanece exatamente igual -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Design Acessível para Todos</h1>
+            <p>Transformamos espaços com soluções criativas e de baixo custo. Acreditamos que todo mundo merece um lar bonito e funcional, independentemente do orçamento.</p>
+            <a href="#servicos" class="btn-hero">Conheça Nossos Serviços</a>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="sobre">
+        <div class="container">
+            <h2 class="section-title">Sobre Nós</h2>
+            <div class="sobre-container">
+                <div class="sobre-texto">
+                    <p>Fundamos a Norteia Studio com um propósito claro: levar design de interiores de qualidade para pessoas que não têm condições de pagar por serviços tradicionais, que costumam ter valores muito altos.</p>
+                    <p>Acreditamos que todos merecem um lugar digno para viver, trabalhar e descansar, independentemente do tamanho do espaço ou do orçamento disponível.</p>
+                    <p>Nossa missão é criar soluções inteligentes que façam ambientes pequenos parecerem maiores e mais funcionais, utilizando criatividade e itens de baixo custo.</p>
+                </div>
+                
+                <div class="equipe-container">
+                    <div class="membro">
+                        <h3>Cleverton Cauã</h3>
+                        <p class="membro-cargo">Designer de Interiores & Estudante de Arquitetura e Urbanismo</p>
+                        <p>Especializado em soluções criativas de baixo custo para transformar espaços compactos. Atualmente cursando Arquitetura e Urbanismo para aprimorar conhecimentos técnicos e expandir possibilidades de atuação.</p>
+                    </div>
+                    
+                    <div class="membro">
+                        <h3>Andreza Bruna</h3>
+                        <p class="membro-cargo">Designer de Interiores & Estudante de Arquitetura e Urbanismo</p>
+                        <p>Com foco em criar ambientes funcionais e aconchegantes que respeitem o orçamento real das pessoas. Cursando Arquitetura e Urbanismo para complementar a formação em design com conhecimentos estruturais e urbanísticos.</p>
+                    </div>
                 </div>
             </div>
-            <h1 class="title">Norteia Studio</h1>
-            <p class="intro-text">Queremos ajudar você a ter uma casa mais organizada, bonita e funcional, sem gastar muito.</p>
-            <p class="subtitle">Responda essas perguntas simples para entendermos como podemos te ajudar!</p>
         </div>
+    </section>
 
-        <div class="form-container">
-            <!-- FORMSUBMIT CONFIGURADO -->
-            <form id="briefingForm" action="https://formsubmit.co/norteiastudio01@gmail.com" method="POST">
+    <!-- Dados IBGE -->
+    <section id="dados">
+        <div class="container">
+            <h2 class="section-title">Por Que Nosso Trabalho É Necessário</h2>
+            <div class="dados-container">
+                <div class="dados-item">
+                    <div class="dados-titulo">
+                        <i class="fas fa-chart-line dados-icon"></i>
+                        <h3>Desafios da Habitação no Brasil</h3>
+                    </div>
+                    <p>Segundo dados do IBGE, mais de 40% da população brasileira vive com até 1 salário mínimo per capita, tornando serviços de design inacessíveis para grande parte da população.</p>
+                </div>
                 
-                <!-- Configurações do FormSubmit -->
-                <input type="hidden" name="_subject" value="Novo Briefing - Norteia Studio">
-                <input type="hidden" name="_template" value="table">
-                <input type="text" name="_honey" style="display:none">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://formsubmit.co/thankyou">
+                <div class="dados-item">
+                    <div class="dados-titulo">
+                        <i class="fas fa-home dados-icon"></i>
+                        <h3>Espaços Compactos</h3>
+                    </div>
+                    <p>Pesquisas do CAU Brasil mostram que mais de 60% dos imóveis nas grandes cidades têm menos de 50m², exigindo soluções inteligentes para otimização do espaço.</p>
+                </div>
                 
-                <!-- Mensagens de feedback -->
-                <div class="success-message" id="successMessage">
-                    <h3>Obrigada pelo seu interesse!</h3>
-                    <p>Seu briefing foi enviado com sucesso. Entraremos em contato em até 24 horas úteis.</p>
+                <div class="dados-item">
+                    <div class="dados-titulo">
+                        <i class="fas fa-hand-holding-usd dados-icon"></i>
+                        <h3>Acesso ao Design</h3>
+                    </div>
+                    <p>Estudos indicam que menos de 5% da população brasileira já contratou um serviço de design de interiores, principalmente devido aos altos custos envolvidos.</p>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="loading" id="loading">
-                    <div class="loading-spinner"></div>
-                    <p>Enviando suas informações...</p>
+    <!-- Serviços -->
+    <section id="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="servicos-container">
+                <div class="servicos-carrossel" id="carrossel">
+                    <!-- Todos os 10 serviços aqui (mantidos do código anterior) -->
+                    <!-- Diagnóstico Visual -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">DIAGNÓSTICO VISUAL</h3>
+                            <div class="servico-preco">R$ 49</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Para quem está perdido e não sabe por onde começar"</p>
+                            <ul class="servico-lista">
+                                <li>Um relatório completo apontando os 3 principais problemas do seu ambiente</li>
+                                <li>Planta simples mostrando como organizar seu espaço</li>
+                                <li>3 opções diferentes de layout para você escolher</li>
+                                <li>Lista com 5 ações prioritárias para fazer agora mesmo</li>
+                                <li>Sugestões de itens baratos (menos de R$ 50 cada)</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 2 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 49 à vista</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem quer uma direção profissional sem gastar muito</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projeto Guia 2D -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">PROJETO GUIA 2D</h3>
+                            <div class="servico-preco">R$ 127</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Seu plano completo de transformação"</p>
+                            <ul class="servico-lista">
+                                <li>Planta técnica com todas as medidas precisas</li>
+                                <li>Layout detalhado mostrando cada móvel no lugar certo</li>
+                                <li>2 versões diferentes de disposição para você comparar</li>
+                                <li>Lista de compras com links dos produtos</li>
+                                <li>Instruções passo a passo de organização</li>
+                                <li>1 revisão para ajustar o que precisar</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 4 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 127 (pode dividir)</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem quer um projeto completo e seguro para executar</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Imersão 3D -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">IMERSÃO 3D</h3>
+                            <div class="servico-preco">R$ 197</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Veja seu ambiente transformado antes de fazer qualquer coisa"</p>
+                            <ul class="servico-lista">
+                                <li>Tudo do Projeto Guia 2D +</li>
+                                <li>Modelo 3D para você "andar" pelo seu ambiente</li>
+                                <li>2 ângulos de visualização diferentes</li>
+                                <li>Estudo de como a luz natural ilumina seu espaço</li>
+                                <li>Visualização dos móveis em tamanho real</li>
+                                <li>2 revisões para acertar cada detalhe</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 6 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 197 (pode dividir)</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem quer ter certeza antes de gastar dinheiro</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Experiência Completa -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">EXPERIÊNCIA COMPLETA</h3>
+                            <div class="servico-preco">R$ 297</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Máximo de resultado com mínimo de preocupação"</p>
+                            <ul class="servico-lista">
+                                <li>Planta 2D super detalhada</li>
+                                <li>Modelo 3D completo com texturas</li>
+                                <li>4 ângulos de visualização realista</li>
+                                <li>Tour virtual para você "passear" pelo projeto</li>
+                                <li>Tutorial personalizado "Faça Você Mesmo"</li>
+                                <li>Acompanhamento por 30 dias para tirar dúvidas</li>
+                                <li>3 revisões até você amar o resultado</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 8 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 297 (pode dividir)</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem quer transformação total com suporte prolongado</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Home Office Popular -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">HOME OFFICE POPULAR</h3>
+                            <div class="servico-preco">R$ 127</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Seu cantinho de trabalho aconchegante e produtivo"</p>
+                            <ul class="servico-lista">
+                                <li>Layout otimizado para trabalho remoto</li>
+                                <li>Soluções de armazenamento para papéis e equipamentos</li>
+                                <li>Iluminação perfeita para reuniões online</li>
+                                <li>Organização de cabos e fios</li>
+                                <li>Lista de móveis compactos e funcionais</li>
+                                <li>Dicas de ergonomia básica</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 4 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 127 (pode dividir)</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem trabalha em casa e quer conforto e produtividade</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quitinete Inteligente -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">QUITINETE INTELIGENTE</h3>
+                            <div class="servico-preco">R$ 197</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Aproveite cada centímetro do seu espaço pequeno"</p>
+                            <ul class="servico-lista">
+                                <li>Zoneamento inteligente para múltiplas funções</li>
+                                <li>Soluções de móveis que fazem 2 ou 3 funções</li>
+                                <li>Armazenamento vertical (do chão ao teto)</li>
+                                <li>Truques de iluminação que ampliam visualmente</li>
+                                <li>Lista de móveis compactos e multifuncionais</li>
+                                <li>Como criar ambientes dentro do ambiente</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 6 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 197 (pode dividir)</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Apartamentos pequenos, kitnets e espaços compactos</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Rotina Aconchegante -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">ROTINA ACONCHEGANTE</h3>
+                            <div class="servico-preco">R$ 157</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Transforme sua casa no seu refúgio particular"</p>
+                            <ul class="servico-lista">
+                                <li>Análise do seu fluxo diário em casa</li>
+                                <li>Soluções anti-stress para o ambiente</li>
+                                <li>Cantos de descanso e lazer personalizados</li>
+                                <li>Iluminação aconchegante para cada momento</li>
+                                <li>Paleta de cores relaxante e harmoniosa</li>
+                                <li>Organização que traz paz mental</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 5 dias úteis</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 157 (pode dividir)</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem busca conforto, bem-estar e qualidade de vida em casa</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Visita Técnica -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">VISITA TÉCNICA</h3>
+                            <div class="servico-preco">R$ 87</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Precisão total para seu projeto"</p>
+                            <ul class="servico-lista">
+                                <li>2 horas de visita no seu ambiente</li>
+                                <li>Medições milimétricas de tudo</li>
+                                <li>Análise da luz natural em diferentes horários</li>
+                                <li>10 fotos profissionais do espaço</li>
+                                <li>Relatório completo de diagnóstico</li>
+                                <li>(Pode ser adicionado a qualquer pacote)</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> Agendamento</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 87</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem precisa de precisão máxima no projeto</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Consulta Cor -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">CONSULTA COR</h3>
+                            <div class="servico-preco">R$ 25</div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"A cor certa muda tudo"</p>
+                            <ul class="servico-lista">
+                                <li>Análise do seu ambiente</li>
+                                <li>3 opções de paleta de cores</li>
+                                <li>Onde comprar tinta com melhor custo</li>
+                                <li>Dicas de aplicação</li>
+                                <li>Resposta em 24h</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> 1 dia útil</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 25</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Quem está em dúvida sobre cores para o ambiente</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Plantão Dúvidas -->
+                    <div class="servico-card">
+                        <div class="servico-header">
+                            <h3 class="servico-titulo">PLANTÃO DÚVIDAS</h3>
+                            <div class="servico-preco"></div>
+                        </div>
+                        <div class="servico-descricao">
+                            <p>"Tire aquela dúvida na hora da compra"</p>
+                            <ul class="servico-lista">
+                                <li>Resposta imediata por WhatsApp</li>
+                                <li>Análise de fotos rápidas</li>
+                                <li>Orientação na loja ou na internet</li>
+                                <li>Ajuda na tomada de decisão</li>
+                                <li>Suporte quando você mais precisa</li>
+                            </ul>
+                            <div class="servico-info">
+                                <div><strong>PRAZO:</strong> Imediato</div>
+                                <div><strong>INVESTIMENTO:</strong> R$ 15/15min</div>
+                            </div>
+                            <p><strong>PERFEITO PARA:</strong> Dúvidas rápidas durante compras ou decisões</p>
+                            <a href="#contato" class="btn-servico">Contratar</a>
+                        </div>
+                    </div>
                 </div>
+                
+                <div class="carrossel-controles">
+                    <button class="carrossel-btn" id="prev-btn" aria-label="Serviços anteriores">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carrossel-btn" id="next-btn" aria-label="Próximos serviços">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- 1. Dados Pessoais -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">1</span>
-                        Dados Pessoais
-                    </h2>
+    <!-- Como Funciona -->
+    <section id="como-funciona">
+        <div class="container">
+            <h2 class="section-title">Como Funciona</h2>
+            <div class="processo">
+                <ul class="processo-lista">
+                    <li>
+                        <h3>Escolha o pacote</h3>
+                        <p>Selecione o serviço que mais combina com suas necessidades e orçamento.</p>
+                    </li>
+                    <li>
+                        <h3>Entre em contato</h3>
+                        <p>Envie uma mensagem no WhatsApp contando sobre seu espaço e suas necessidades.</p>
+                    </li>
+                    <li>
+                        <h3>Receba o contrato</h3>
+                        <p>Enviaremos um contrato simplificado para formalizar nosso trabalho.</p>
+                    </li>
+                    <li>
+                        <h3>Faça o pagamento</h3>
+                        <p>Pagamento com 50% de entrada + 50% na entrega. Aceitamos PIX e transferência.</p>
+                    </li>
+                    <li>
+                        <h3>Transformação</h3>
+                        <p>Começaremos a trabalhar no seu projeto dentro do prazo estabelecido.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Colaboradores -->
+    <section id="colaboradores" class="colaboradores">
+        <div class="container">
+            <h2 class="section-title">Área de Colaboradores</h2>
+            <div class="colaboradores-container">
+                <p>A Norteia Studio acredita na força da colaboração para transformar mais vidas através do design acessível.</p>
+                <p>Se você é arquiteto, designer, estudante da área ou simplesmente tem interesse em apoiar nossa causa, junte-se a nós!</p>
+                <p>Estamos abertos a parcerias com lojas de materiais de construção, marcas de móveis e qualquer pessoa ou empresa que queira fazer parte deste movimento.</p>
+                <a href="#contato" class="btn-colaborar">Quero Ser um Colaborador</a>
+            </div>
+        </div>
+    </section>
+
+   <!-- Contato -->
+<section id="contato">
+    <div class="container">
+        <h2 class="section-title">Entre em Contato</h2>
+        <div class="contato-container">
+            <div class="form-contato">
+                <form action="https://formsubmit.co/norteiastudio01@gmail.com" method="POST">
+                    <!-- Configurações do FormSubmit -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://seuusuario.github.io/seurepositorio/obrigado.html">
+                    <input type="hidden" name="_subject" value="Novo contato do site Norteia Studio">
                     
                     <div class="form-group">
-                        <label class="required label-simple">Nome completo</label>
-                        <input type="text" name="nome" required placeholder="Seu nome completo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="name" class="form-control" required>
                     </div>
-
                     <div class="form-group">
-                        <label class="label-simple">Celular/WhatsApp</label>
-                        <input type="tel" name="telefone" required placeholder="(11) 99999-9999">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
-
                     <div class="form-group">
-                        <label class="label-simple">Bairro onde mora</label>
-                        <input type="text" name="bairro" required placeholder="Seu bairro">
+                        <label for="servico">Serviço de Interesse</label>
+                        <select id="servico" name="servico" class="form-control">
+                            <option value="">Selecione um serviço</option>
+                            <option value="Diagnóstico Visual - R$ 49">Diagnóstico Visual - R$ 49</option>
+                            <option value="Projeto Guia 2D - R$ 127">Projeto Guia 2D - R$ 127</option>
+                            <option value="Imersão 3D - R$ 197">Imersão 3D - R$ 197</option>
+                            <option value="Experiência Completa - R$ 297">Experiência Completa - R$ 297</option>
+                            <option value="Home Office Popular - R$ 127">Home Office Popular - R$ 127</option>
+                            <option value="Quitinete Inteligente - R$ 197">Quitinete Inteligente - R$ 197</option>
+                            <option value="Rotina Aconchegante - R$ 157">Rotina Aconchegante - R$ 157</option>
+                            <option value="Visita Técnica - R$ 87">Visita Técnica - R$ 87</option>
+                            <option value="Consulta Cor - R$ 25">Consulta Cor - R$ 25</option>
+                            <option value="Plantão Dúvidas - R$ 15/15min">Plantão Dúvidas - R$ 15/15min</option>
+                        </select>
                     </div>
-
                     <div class="form-group">
-                        <label class="label-simple">E-mail (opcional)</label>
-                        <input type="email" name="email" placeholder="seu@email.com">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="message" rows="5" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+                </form>
+            </div>
+            <div class="info-contato">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h4>WhatsApp</h4>
+                        <p>(96) 99120-8893</p>
                     </div>
                 </div>
-
-                <!-- 2. Sobre o Cômodo -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">2</span>
-                        Sobre o Cômodo
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label class="required label-simple">Qual cômodo você quer melhorar?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="comodo" value="Sala" required> Sala
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="comodo" value="Quarto"> Quarto
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="comodo" value="Cozinha"> Cozinha
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="comodo" value="Banheiro"> Banheiro
-                            </label>
-                            <label class="radio-item" id="outro-comodo">
-                                <input type="radio" name="comodo" value="Outro"> Outro:
-                            </label>
-                        </div>
-                        <input type="text" name="comodo_outro" class="other-input" placeholder="Qual cômodo?">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
                     </div>
-
-                    <div class="form-group">
-                        <label class="required label-simple">Quantas pessoas moram com você?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="pessoas" value="1-2" required> 1-2
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="pessoas" value="3-4"> 3-4
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="pessoas" value="5 ou mais"> 5 ou mais
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="required label-simple">Tem crianças ou idosos na casa?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="criancas_idosos" value="Não" required> Não
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="criancas_idosos" value="Sim, crianças"> Sim, crianças
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="criancas_idosos" value="Sim, idosos"> Sim, idosos
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="criancas_idosos" value="Os dois"> Os dois
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="required label-simple">Tem animais em casa?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="animais" value="Não" required> Não
-                            </label>
-                            <label class="radio-item" id="sim-animais">
-                                <input type="radio" name="animais" value="Sim"> Sim
-                            </label>
-                        </div>
-                        <input type="text" name="animais_tipo" class="other-input" placeholder="Quais animais?">
+                    <div>
+                        <h4>E-mail</h4>
+                        <p>norteiastudio01@gmail.com</p>
                     </div>
                 </div>
-
-                <!-- 3. Principais Dificuldades -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">3</span>
-                        Principais Dificuldades
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label class="required label-simple">O que mais te incomoda nesse cômodo? (pode marcar mais de um)</label>
-                        <div class="checkbox-grid">
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="dificuldades[]" value="desorganização">desorganização
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="dificuldades[]" value="Espaço muito pequeno"> Espaço muito pequeno
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="dificuldades[]" value="Falta de lugar para guardar coisas"> Falta de lugar para guardar coisas
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="dificuldades[]" value="Móveis velhos ou quebrados"> Móveis velhos ou quebrados
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="dificuldades[]" value="Pouca claridade/escuro"> Pouca claridade/escuro
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="dificuldades[]" value="Dificuldade para circular"> Dificuldade para circular
-                            </label>
-                            <label class="checkbox-item" id="outra-dificuldade">
-                                <input type="checkbox" name="dificuldades[]" value="Outro"> Outro
-                            </label>
-                        </div>
-                        <input type="text" name="dificuldade_outro" class="other-input" placeholder="Qual outra dificuldade?">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fab fa-instagram"></i>
                     </div>
-
-                    <div class="form-group">
-                        <label class="required label-simple">Como você sonha com esse espaço?</label>
-                        <div class="checkbox-grid">
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="sonhos[]" value="Mais organizado e fácil de limpar"> Mais organizado e fácil de limpar
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="sonhos[]" value="Mais aconchegante e bonito"> Mais aconchegante e bonito
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="sonhos[]" value="Mais espaço para a família"> Mais espaço para a família
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="sonhos[]" value="Um cantinho só meu"> Um cantinho só meu
-                            </label>
-                            <label class="checkbox-item" id="outro-sonho">
-                                <input type="checkbox" name="sonhos[]" value="Outro"> Outro
-                            </label>
-                        </div>
-                        <input type="text" name="sonho_outro" class="other-input" placeholder="Qual outro sonho?">
+                    <div>
+                        <h4>Instagram</h4>
+                        <p>@norteiastudio</p>
                     </div>
                 </div>
-
-                <!-- 4. Seu Gosto Pessoal -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">4</span>
-                        Seu Gosto Pessoal
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label class="required label-simple">Que estilo você mais gosta?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="estilo" value="Moderno e simples" required> Moderno e simples
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="estilo" value="Aconchegante e colorido"> Aconchegante e colorido
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="estilo" value="Rústico/natural"> Rústico/natural
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="estilo" value="Não sei - preciso de ajuda"> Não sei - preciso de ajuda
-                            </label>
-                        </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-money-bill-wave"></i>
                     </div>
-
-                    <div class="form-group">
-                        <label class="label-simple">Quais cores você gosta?</label>
-                        <input type="text" name="cores_gosta" placeholder="Exemplo: azul, verde, amarelo, cores claras...">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="label-simple">Tem alguma cor que não gosta?</label>
-                        <input type="text" name="cores_nao_gosta" placeholder="Exemplo: vermelho, roxo...">
+                    <div>
+                        <h4>Pagamento</h4>
+                        <p>Aceitamos PIX, transferência e parcelamento</p>
                     </div>
                 </div>
-
-                <!-- 5. Orçamento e Tempo -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">5</span>
-                        Orçamento e Tempo
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label class="required label-simple">Quanto você pode investir?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="orcamento" value="Até R$ 150" required> Até R$ 150
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="orcamento" value="R$ 150 - R$ 300"> R$ 150 - R$ 300
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="orcamento" value="R$ 300 - R$ 500"> R$ 300 - R$ 500
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="orcamento" value="R$ 500 - R$ 800"> R$ 500 - R$ 800
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="orcamento" value="Posso conversar sobre valores"> Posso conversar sobre valores
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="required label-simple">Quando quer começar?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="prazo" value="Imediatamente" required> Imediatamente
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="prazo" value="Nos próximos 15 dias"> Nos próximos 15 dias
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="prazo" value="No próximo mês"> No próximo mês
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="prazo" value="Só planejando por enquanto"> Só planejando por enquanto
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6. Fotos e Medidas -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">6</span>
-                        Fotos e Medidas
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label class="required label-simple">Precisa de ajuda para medir o espaço?</label>
-                        <div class="radio-grid">
-                            <label class="radio-item">
-                                <input type="radio" name="medidas" value="Já tenho as medidas" required> Já tenho as medidas
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="medidas" value="Preciso de instruções simples"> Preciso de instruções simples
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="medidas" value="Posso agendar uma visita técnica (a partir de R$ 50)"> Posso agendar uma visita técnica (a partir de R$ 50)
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Recomendação do WhatsApp -->
-                    <div class="whatsapp-recommendation">
-                        <h3><i class="fab fa-whatsapp whatsapp-icon"></i> Fotos e Vídeos do Espaço</h3>
-                        <p><strong>Para criarmos a solução perfeita para você, precisamos ver seu espaço!</strong></p>
-                        <p>Envie fotos e vídeos do cômodo pelo <span class="highlight">WhatsApp (96) 99120-8893</span> para entendermos melhor suas necessidades.</p>
-                    </div>
-                </div>
-
-                <!-- 7. Algo Mais? -->
-                <div class="form-section">
-                    <h2 class="section-title">
-                        <span class="section-number">7</span>
-                        Algo Mais?
-                    </h2>
-                    
-                    <div class="form-group">
-                        <label class="label-simple">Tem alguma coisa importante que precisamos saber?</label>
-                        <div class="checkbox-grid">
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="informacoes_importantes[]" value="Tenho alguma necessidade especial"> Tenho alguma necessidade especial
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="informacoes_importantes[]" value="Preciso de móveis adaptados"> Preciso de móveis adaptados
-                            </label>
-                            <label class="checkbox-item">
-                                <input type="checkbox" name="informacoes_importantes[]" value="Tenho alergia a algum material"> Tenho alergia a algum material
-                            </label>
-                            <label class="checkbox-item" id="outra-informacao">
-                                <input type="checkbox" name="informacoes_importantes[]" value="Outro"> Outro
-                            </label>
-                        </div>
-                        <input type="text" name="informacao_outro" class="other-input" placeholder="Qual outra informação?">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="label-simple">Alguma coisa que não pode faltar no seu novo espaço?</label>
-                        <textarea name="nao_pode_faltar" rows="3" placeholder="Conte para a gente o que é essencial para você..."></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <span class="submit-icon"><i class="fas fa-paper-plane"></i></span>
-                    Enviar Meu Briefing
-                </button>
-            </form>
+            </div>
         </div>
     </div>
+</section>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        Norteia Studio
+                    </div>
+                    <p>Seu norte para ambientes acolhedores. Design de interiores acessível para todos.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/5596991208893" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/norteiastudio" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="mailto:norteiastudio01@gmail.com" aria-label="E-mail">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="#servicos">Diagnóstico Visual</a></li>
+                        <li><a href="#servicos">Projeto Guia 2D</a></li>
+                        <li><a href="#servicos">Imersão 3D</a></li>
+                        <li><a href="#servicos">Experiência Completa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="#colaboradores">Colaboradores</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fab fa-whatsapp"></i> (96) 99120-8893</li>
+                        <li><i class="fas fa-envelope"></i> norteiastudio01@gmail.com</li>
+                        <li><i class="fab fa-instagram"></i> @norteiastudio</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Norteia Studio. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
     <script>
-        // Controle dos campos "Outro"
-        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(input) {
-            input.addEventListener('change', function() {
-                var outros = {
-                    'outro-comodo': 'comodo_outro',
-                    'sim-animais': 'animais_tipo', 
-                    'outra-dificuldade': 'dificuldade_outro',
-                    'outro-sonho': 'sonho_outro',
-                    'outra-informacao': 'informacao_outro'
-                };
-
-                for (var triggerId in outros) {
-                    if (outros.hasOwnProperty(triggerId)) {
-                        var trigger = document.getElementById(triggerId);
-                        var inputClass = outros[triggerId];
-                        var otherInput = document.querySelector('.other-input[name="' + inputClass + '"]');
-                        
-                        if (trigger && otherInput) {
-                            var isChecked = trigger.querySelector('input').checked;
-                            if (isChecked) {
-                                otherInput.classList.add('show');
-                                otherInput.required = true;
-                            } else {
-                                otherInput.classList.remove('show');
-                                otherInput.required = false;
-                                otherInput.value = '';
-                            }
-                        }
-                    }
-                }
-            });
-        });
-
-        // Envio do formulário com FormSubmit
-        document.getElementById('briefingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            var form = e.target;
-            var submitBtn = form.querySelector('.submit-btn');
-            var loading = document.getElementById('loading');
-            var successMessage = document.getElementById('successMessage');
-            
-            // Validação básica
-            var requiredFields = form.querySelectorAll('[required]');
-            var isValid = true;
-            
-            requiredFields.forEach(function(field) {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = '#ff4444';
-                } else {
-                    field.style.borderColor = '';
-                }
-            });
-
-            if (!isValid) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-
-            // Mostra loading
-            submitBtn.style.display = 'none';
-            loading.style.display = 'block';
-            
-            // Envio tradicional do formulário (compatível com Safari)
-            form.submit();
-            
-            // Fallback: se o envio não funcionar após 10 segundos
-            setTimeout(function() {
-                if (loading.style.display !== 'none') {
-                    loading.style.display = 'none';
-                    submitBtn.style.display = 'block';
-                    alert('Parece que houve um problema com o envio. Entre em contato diretamente pelo WhatsApp (96) 99120-8893');
-                }
-            }, 10000);
-        });
-
-        // Remove estilos de erro quando o usuário começa a digitar
-        document.querySelectorAll('input, textarea, select').forEach(function(field) {
-            field.addEventListener('input', function() {
-                if (this.style.borderColor === 'rgb(255, 68, 68)') {
-                    this.style.borderColor = '';
-                }
-            });
-        });
-
-        // Efeito de digitação no subtítulo
-        var subtitle = document.querySelector('.subtitle');
-        var text = subtitle.textContent;
-        subtitle.textContent = '';
-        var i = 0;
+        // Carrossel de serviços
+        const carrossel = document.getElementById('carrossel');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
         
-        function typeWriter() {
-            if (i < text.length) {
-                subtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
+        if (carrossel && prevBtn && nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                carrossel.scrollBy({ left: 350, behavior: 'smooth' });
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                carrossel.scrollBy({ left: -350, behavior: 'smooth' });
+            });
         }
         
-        setTimeout(typeWriter, 1000);
+        // Suporte para navegadores antigos
+        if (!window.addEventListener) {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"><\/script>');
+        }
     </script>
+
 </body>
 </html>
